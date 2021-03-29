@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Auth\TeacherController;
 use App\Http\Controllers\ShecduleDefese;
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
 });
 //Shool
 Route::post('school/create_schedule',[ShecduleDefese::class,'create']);
+Route::get('school/show_schedule',[ShecduleDefese::class,'show']);
+Route::get('school/showcandidate',[ShecduleDefese::class,'listCaditate']);
+Route::post('adviosr/add_info',[TeacherController::class,'add_adivisor_info']);
+Route::get('adviosr/show_rating',[TeacherController::class,'show_rating']);

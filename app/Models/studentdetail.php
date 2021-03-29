@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Scheduale extends Model
+class studentdetail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'studentName',
+                'stuName',
+                'email',
                 'room',
                 'generate',
                 'defensedate',
@@ -18,7 +19,6 @@ class Scheduale extends Model
                 'topic',
                 'company',
                 'advisor',
-                'email',
                 'studentid'
     ];
 }

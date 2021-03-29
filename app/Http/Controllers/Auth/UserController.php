@@ -12,6 +12,8 @@ use App\Models\SchoolModel;
 use App\Models\TeacherModel;
 use App\Models\StudentModel;
 use App\Models\JuryModel;
+use App\Models\studentdetail;
+use App\Models\adivsor_info;
 
 class UserController extends Controller
 {
@@ -40,6 +42,12 @@ class UserController extends Controller
                     'email' =>$req->email,
                     
                 ]);
+                $studentdetail = studentdetail::create([
+                    'stuName'=>$req->name,
+                    'email' =>$req->email,
+                    'studentid'=>$data->id,
+                    
+                ]);
             }
             elseif($req->input('type')=="teacher")
             {
@@ -48,6 +56,13 @@ class UserController extends Controller
                     'email' =>$req->email,
                     
                 ]);
+                $data = adivsor_info::create([
+                    'advisorname'=>$req->name,
+                    'email' =>$req->email,
+                    'userid'=>$data->id,
+                    
+                ]);
+                
             }
             elseif($req->input('type')=="jury")
             {
@@ -111,7 +126,7 @@ class UserController extends Controller
                 return response()->json(['status_code'=>500,'message'=>'Dose not have this email in student record']);
             }
         }
-        elseif($req->type=="teacher")
+        if($req->type=="teacher")
         {
             $teacher = TeacherModel::where('email',$req->email)->first();
             if($teacher)
@@ -132,7 +147,7 @@ class UserController extends Controller
                 return response()->json(['status_code'=>500,'message'=>'Dose not have this email in table']);
             }
         }
-        elseif($req->type=="school")
+        if($req->type=="school")
         {
             $school = SchoolModel::where('email',$req->email)->first();
             if($school)
@@ -153,7 +168,7 @@ class UserController extends Controller
                 return response()->json(['status_code'=>500,'message'=>'Dose not have this email in School record']);
             }
         }
-        elseif($req->type=="jury")
+        if($req->type=="jury")
         {
             $jury = JuryModel::where('email',$req->email)->first();
             if($jury)
